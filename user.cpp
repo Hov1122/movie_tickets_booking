@@ -1,11 +1,12 @@
 #include "user.h"
+#include <vector>
 
-User::User(string name) {
-    this->name = name;
-    id = getUserCount() + 1;
-    userCount++; 
+
+void User::addMovie(int movie_id, int seat) {
+    movies.push_back(movie_id);
+    seats.push_back(seat);
 }
 
-static int User::getUserCount() {
-    return userCount;
+void User::setPhone(string number) {
+    phone = number;
 }
