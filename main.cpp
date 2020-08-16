@@ -9,7 +9,148 @@
 
 using namespace std;
 
+// helper functions
+string login_reg(); //make login or registration
 vector<string> splitSentence(string);
+int getIndex(vector<string> v, string K);
+//
+
+void showMenu();
+void bookticket();
+void showMyTickets(int);
+void addNewMovie();
+void deleteMovie();
+void showMovieList();
+void exitOrMenu();
+
+int main() {
+    
+    User user(login_reg()); // return login and create user object with that login
+    showMenu();
+
+    return 0;
+}
+
+
+/// functions ///
+/// functions ///
+/// functions ///
+
+void showMenu() {
+    string menu = R"(Welcome to Movie Ticket Booking System
+
+Menu
+1. Book tiket
+2. Show my tickets
+3. Add new movie
+4. Delete movie
+5. Show movie list
+6. Exit
+Choose one: )";
+    cout << menu << " ";
+    int option;
+    do {
+        cin >> option; 
+        switch (option) {
+            case 1:
+                system("clear"); // for windows use system("cls")
+                break;
+            case 2:
+
+                break;
+            case 3:
+            
+                break;
+            case 4:
+            
+                break;
+            case 5:
+                {
+                    showMovieList();
+                    exitOrMenu();
+                    break;
+                }
+            case 6:
+                exit(0);
+                break;
+
+            default:
+                cout << "You must enter integer between 1 and 7: ";
+                break;
+            }
+        } while (option > 7 || option < 1);
+}
+
+void bookTicket() {
+    // TO DO
+}
+
+void showMyTickets(int id) {
+    // TO DO
+    ifstream moviesFile;
+    moviesFile.open("test.csv");
+    int count = 1;
+    // while (moviesFile.good()) {
+    //     string line;
+    //     getline(moviesFile, line, ',');
+    //     cout << line << " ";
+    //     if (count % 3 == 1 && stoi(line) == id) {
+    //         string row;
+    //         getline(moviesFile, row);
+    //         cout << row;
+    //     }
+    //     count++;
+    // }
+    moviesFile.close();
+}
+
+void addNewMovie() {
+    // TO DO
+}
+
+void deletMovie() {
+    // TO DO
+}
+
+void showMovieList() {
+    system("clear");
+    ifstream moviesFile;
+    moviesFile.open("test.csv");
+    while (moviesFile.good()) {
+        string line;
+        getline(moviesFile, line, ',');
+        cout << line << " | ";
+    }
+    cout << endl;
+}
+
+void exitOrMenu() {
+    char op;
+    cout << "Press b to go back or anything else to close the program : ";
+    cin >> op;
+    if (op == 'b') showMenu();
+    else{exit(0);}
+}
+
+/// helper functions ///
+/// helper functions ///
+/// helper functions ///
+
+vector<string> splitSentence(string line) {
+    vector <string> tokens; 
+      
+    // stringstream class check1 
+    stringstream check1(line); 
+      
+    string intermediate; 
+      
+    // Tokenizing w.r.t. space ' ' 
+    while(getline(check1, intermediate, ' ')) 
+    { 
+        tokens.push_back(intermediate); 
+    } 
+    return tokens;
+}
 
 int getIndex(vector<string> v, string K) 
 { 
@@ -30,13 +171,8 @@ int getIndex(vector<string> v, string K)
         return -1; 
     } 
 } 
-void showMenu();
-void showMyTickets(int);
-void showMovieList();
-void exitOrMenu();
 
-int main() {
-    
+string login_reg() {
     int lop;
     string login;
     do {
@@ -107,109 +243,8 @@ int main() {
         }
         system("clear");
     } while(lop != 1);
-    
+
     system("clear");
-    User user(login);
-    showMenu();
-    
 
-}
-
-void showMenu() {
-    string menu = R"(Welcome to Movie Ticket Booking System
-
-Menu
-1. Book tiket
-2. Show my tickets
-3. Add new movie
-4. Delete movie
-5. Show movie list
-6. Exit
-Choose one: )";
-    cout << menu << " ";
-    int option;
-    do {
-        cin >> option; 
-        switch (option) {
-            case 1:
-                system("clear"); // for windows use system("cls")
-                break;
-            case 2:
-
-                break;
-            case 3:
-            
-                break;
-            case 4:
-            
-                break;
-            case 5:
-                {
-                    showMovieList();
-                    exitOrMenu();
-                    break;
-                }
-            case 6:
-                exit(0);
-                break;
-
-            default:
-                cout << "You must enter integer between 1 and 7: ";
-                break;
-            }
-        } while (option > 7 || option < 1);
-}
-
-void showMyTickets(int id) {
-    ifstream moviesFile;
-    moviesFile.open("test.csv");
-    int count = 1;
-    while (moviesFile.good()) {
-        string line;
-        getline(moviesFile, line, ',');
-        cout << line << " ";
-        if (count % 3 == 1 && stoi(line) == id) {
-            string row;
-            getline(moviesFile, row);
-            cout << row;
-        }
-        count++;
-    }
-    moviesFile.close();
-}
-
-void showMovieList() {
-    system("clear");
-    ifstream moviesFile;
-    moviesFile.open("test.csv");
-    while (moviesFile.good()) {
-        string line;
-        getline(moviesFile, line, ',');
-        cout << line << " | ";
-    }
-    cout << endl;
-}
-
-vector<string> splitSentence(string line) {
-    vector <string> tokens; 
-      
-    // stringstream class check1 
-    stringstream check1(line); 
-      
-    string intermediate; 
-      
-    // Tokenizing w.r.t. space ' ' 
-    while(getline(check1, intermediate, ' ')) 
-    { 
-        tokens.push_back(intermediate); 
-    } 
-    return tokens;
-}
-
-void exitOrMenu() {
-    char op;
-    cout << "Press b to go back or anything else to close the program : ";
-    cin >> op;
-    if (op == 'b') showMenu();
-    else{exit(0);}
+    return login;
 }
