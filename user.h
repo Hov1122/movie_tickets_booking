@@ -11,7 +11,7 @@ class User
     private:
         vector <int> movies;
         vector <int> seats;
-        const char* name;
+        string name;
         int id;
         string phone;
         static int userCount;
@@ -19,12 +19,19 @@ class User
     public:
         void addMovie(int, int);
         User(const char*); // name
+        User(string name);
         void setPhone(string);
         static int getUserCount() {return userCount;}
         
 };
+
 int User::userCount = 0;
 User::User(const char* name) {
+    this->name = name;
+    id = ++userCount;
+}
+
+User::User(string name) {
     this->name = name;
     id = ++userCount;
 }
